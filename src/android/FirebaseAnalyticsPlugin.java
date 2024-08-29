@@ -76,10 +76,10 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
         try {
         JSONObject params = args.getJSONObject(0);
 
-        boolean allowAnalyticsStorage = params.optBoolean("GOOGLE_ANALYTICS_DEFAULT_ALLOW_ANALYTICS_STORAGE", true);
-        boolean allowAdStorage = params.optBoolean("GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_STORAGE", true);
-        boolean allowAdUserData = params.optBoolean("GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_USER_DATA", true);
-        boolean allowAdPersonalizationSignals = params.optBoolean("GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_PERSONALIZATION_SIGNALS", true);
+        boolean allowAnalyticsStorage = params.optBoolean("GOOGLE_ANALYTICS_DEFAULT_ALLOW_ANALYTICS_STORAGE", false);
+        boolean allowAdStorage = params.optBoolean("GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_STORAGE", false);
+        boolean allowAdUserData = params.optBoolean("GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_USER_DATA", false);
+        boolean allowAdPersonalizationSignals = params.optBoolean("GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_PERSONALIZATION_SIGNALS", false);
 
         Map<ConsentType, ConsentStatus> consentMap = new EnumMap<>(ConsentType.class);
         consentMap.put(ConsentType.ANALYTICS_STORAGE, allowAnalyticsStorage ? ConsentStatus.GRANTED : ConsentStatus.DENIED);
