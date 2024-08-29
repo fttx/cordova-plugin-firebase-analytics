@@ -18,6 +18,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import java.util.Map;
+import java.util.EnumMap;
+import com.google.firebase.analytics.FirebaseAnalytics.ConsentType;
+import com.google.firebase.analytics.FirebaseAnalytics.ConsentStatus;
+
 public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
     private static final String TAG = "FirebaseAnalyticsPlugin";
 
@@ -64,6 +69,30 @@ public class FirebaseAnalyticsPlugin extends ReflectiveCordovaPlugin {
         boolean enabled = args.getBoolean(0);
         firebaseAnalytics.setAnalyticsCollectionEnabled(enabled);
         callbackContext.success();
+    }
+
+    @CordovaMethod
+    public void setAnalyticsConsent(CordovaArgs args, CallbackContext callbackContext) {
+        try {
+        JSONObject params = args.getJSONObject(0);
+
+        boolean allowAnalyticsStorage = params.optBoolean("GOOGLE_ANALYTICS_DEFAULT_ALLOW_ANALYTICS_STORAGE", true);
+        boolean allowAdStorage = params.optBoolean("GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_STORAGE", true);
+        boolean allowAdUserData = params.optBoolean("GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_USER_DATA", true);
+        boolean allowAdPersonalizationSignals = params.optBoolean("GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_PERSONALIZATION_SIGNALS", true);
+
+        Map<ConsentType, ConsentStatus> consentMap = new EnumMap<>(ConsentType.class);
+        consentMap.put(ConsentType.ANALYTICS_STORAGE, allowAnalyticsStorage ? ConsentStatus.GRANTED : ConsentStatus.DENIED);
+        consentMap.put(ConsentType.AD_STORAGE, allowAdStorage ? ConsentStatus.GRANTED : ConsentStatus.DENIED);
+        consentMap.put(ConsentType.AD_USER_DATA, allowAdUserData ? ConsentStatus.GRANTED : ConsentStatus.DENIED);
+        consentMap.put(ConsentType.AD_PERSONALIZATION, allowAdPersonalizationSignals ? ConsentStatus.GRANTED : ConsentStatus.DENIED);
+
+        firebaseAnalytics.setConsent(consentMap);
+
+        callbackContext.success();
+        } catch (JSONException e) {
+        callbackContext.error("Invalid JSON format: " + e.getMessage());
+        }
     }
 
     @CordovaMethod

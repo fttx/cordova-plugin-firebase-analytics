@@ -87,6 +87,32 @@ function(enabled) {
     });
 };
 
+exports.setAnalyticsConsent =
+/**
+ * Sets the consent settings for Firebase Analytics based on provided boolean parameters.
+ *
+ * @param {Object} consentSettings An object containing boolean values for various consent settings:
+ *  - "GOOGLE_ANALYTICS_DEFAULT_ALLOW_ANALYTICS_STORAGE": {boolean} - Grants or denies consent for analytics storage.
+ *  - "GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_STORAGE": {boolean} - Grants or denies consent for ad storage.
+ *  - "GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_USER_DATA": {boolean} - Grants or denies consent for ad user data.
+ *  - "GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_PERSONALIZATION_SIGNALS": {boolean} - Grants or denies consent for ad personalization signals.
+ * @returns {Promise<void>} Callback when the operation is completed
+ *
+ * @example
+ * cordova.plugins.firebase.analytics.setAnalyticsConsent({
+ *     "GOOGLE_ANALYTICS_DEFAULT_ALLOW_ANALYTICS_STORAGE": true,
+ *     "GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_STORAGE": true,
+ *     "GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_USER_DATA": true,
+ *     "GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_PERSONALIZATION_SIGNALS": true
+ * });
+ */
+function(consentSettings) {
+    return new Promise(function(resolve, reject) {
+        exec(resolve, reject, PLUGIN_NAME, "setAnalyticsConsent", [consentSettings]);
+    });
+};
+
+
 exports.setCurrentScreen =
 /**
  * Sets the current screen name, which specifies the current visual context in your app. This helps identify the areas in your app where users spend their time and how they interact with your app.

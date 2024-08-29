@@ -28,6 +28,7 @@
     - [setCurrentScreen](#setcurrentscreen)
     - [setDefaultEventParameters](#setdefaulteventparameters)
     - [setEnabled](#setenabled)
+    - [setAnalyticsConsent](#setAnalyticsConsent)
     - [setUserId](#setuserid)
     - [setUserProperty](#setuserproperty)
 
@@ -43,11 +44,11 @@
     $ cordova plugin add cordova-plugin-firebase-analytics
 
 If you get an error about CocoaPods being unable to find compatible versions, run
-    
+
     $ pod repo update
 
 Use variables `ANDROID_FIREBASE_BOM_VERSION` or `IOS_FIREBASE_POD_VERSION` to override dependency versions for Firebase SDKs:
-    
+
     $ cordova plugin add cordova-plugin-firebase-analytics \
         --variable IOS_FIREBASE_POD_VERSION="9.3.0" \
         --variable ANDROID_FIREBASE_BOM_VERSION="30.3.1"
@@ -202,6 +203,25 @@ Sets whether analytics collection is enabled for this app on this device.
 
 ```ts
 cordova.plugins.firebase.analytics.setEnabled(false);
+```
+
+___
+
+### setAnalyticsConsent
+
+**setAnalyticsConsent**(`json object`): `Promise`<`void`\>
+
+Sets the consent map
+
+**`Example`**
+
+```ts
+cordova.plugins.firebase.analytics.setAnalyticsConsent({
+    "GOOGLE_ANALYTICS_DEFAULT_ALLOW_ANALYTICS_STORAGE": true,
+    "GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_STORAGE": true,
+    "GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_USER_DATA": true,
+    "GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_PERSONALIZATION_SIGNALS": true
+});
 ```
 
 #### Parameters

@@ -51,6 +51,31 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
+- (void)setAnalyticsConsent:(CDVInvokedUrlCommand *)command {
+    NSDictionary *consentSettings = [command.arguments objectAtIndex:0];
+
+    // Extract each boolean parameter from the consent settings dictionary
+    BOOL allowAnalyticsStorage = [[consentSettings objectForKey:@"GOOGLE_ANALYTICS_DEFAULT_ALLOW_ANALYTICS_STORAGE"] boolValue];
+    BOOL allowAdStorage = [[consentSettings objectForKey:@"GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_STORAGE"] boolValue];
+    BOOL allowAdUserData = [[consentSettings objectForKey:@"GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_USER_DATA"] boolValue];
+    BOOL allowAdPersonalizationSignals = [[consentSettings objectForKey:@"GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_PERSONALIZATION_SIGNALS"] boolValue];
+
+    // Create a consent map for Firebase Analytics
+    NSDictionary *consentMap = @{
+        FIRConsentTypeAnalyticsStorage : allowAnalyticsStorage ? FIRConsentStatusGranted : FIRConsentStatusDenied,
+        FIRConsentTypeAdStorage : allowAdStorage ? FIRConsentStatusGranted : FIRConsentStatusDenied,
+        FIRConsentTypeAdUserData : allowAdUserData ? FIRConsentStatusGranted : FIRConsentStatusDenied,
+        FIRConsentTypeAdPersonalization : allowAdPersonalizationSignals ? FIRConsentStatusGranted : FIRConsentStatusDenied
+    };
+
+    // Set consent settings in Firebase Analytics
+    [FIRAnalytics setConsent:consentMap];
+
+    // Respond back to the JavaScript side with success
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 - (void)setCurrentScreen:(CDVInvokedUrlCommand *)command {
     NSString* screenName = [command.arguments objectAtIndex:0];
 
