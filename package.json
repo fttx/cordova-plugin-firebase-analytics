@@ -1,5 +1,5 @@
 {
-  "name": "cordova-plugin-firebase-analytics",
+  "name": "@fttx/cordova-plugin-firebase-analytics",
   "version": "8.0.0",
   "description": "Cordova plugin for Firebase Analytics",
   "types": "./types/index.d.ts",
