@@ -4,7 +4,7 @@
   "description": "Cordova plugin for Firebase Analytics",
   "types": "./types/index.d.ts",
   "cordova": {
-    "id": "cordova-plugin-firebase-analytics",
+    "id": "@fttx/cordova-plugin-firebase-analytics",
     "platforms": [
       "ios",
       "android"

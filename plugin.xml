@@ -1,7 +1,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-xmlns:android="http://schemas.android.com/apk/res/android"
-           id="cordova-plugin-firebase-analytics"
-      version="8.2.1">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="@fttx/cordova-plugin-firebase-analytics"
+    version="8.2.1">
 
     <name>FirebaseAnalyticsPlugin</name>
     <description>Cordova plugin for Firebase Analytics</description>
@@ -15,9 +15,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     </js-module>
 
     <engines>
-        <engine name="cordova" version=">=10.0.0"/>
-        <engine name="cordova-android" version=">=11.0.0"/>
-        <engine name="cordova-ios" version=">=6.0.0"/>
+        <engine name="cordova" version=">=10.0.0" />
+        <engine name="cordova-android" version=">=11.0.0" />
+        <engine name="cordova-ios" version=">=6.0.0" />
     </engines>
 
     <preference name="ANALYTICS_COLLECTION_ENABLED" default="true" />
@@ -39,7 +39,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 
         <!--
             use a bit hacky method to set boolean value as a string:
-            https://developer.apple.com/documentation/foundation/nsstring/1409420-boolvalue?preferredLanguage=occ
+        https://developer.apple.com/documentation/foundation/nsstring/1409420-boolvalue?preferredLanguage=occ
         -->
         <config-file target="*-Info.plist" parent="FIREBASE_ANALYTICS_COLLECTION_ENABLED">
             <string>$ANALYTICS_COLLECTION_ENABLED</string>
@@ -53,7 +53,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 
         <podspec>
             <config>
-                <source url="https://cdn.cocoapods.org/"/>
+                <source url="https://cdn.cocoapods.org/" />
             </config>
             <pods use-frameworks="true">
                 <pod name="Firebase/Analytics" spec="$IOS_FIREBASE_POD_VERSION" />
@@ -66,7 +66,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="FirebaseAnalytics">
-                <param name="android-package" value="by.chemerisuk.cordova.firebase.FirebaseAnalyticsPlugin" />
+                <param name="android-package"
+                    value="by.chemerisuk.cordova.firebase.FirebaseAnalyticsPlugin" />
                 <param name="onload" value="$ANALYTICS_COLLECTION_ENABLED" />
             </feature>
         </config-file>
@@ -82,12 +83,18 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <meta-data android:name="firebase_analytics_collection_enabled" android:value="$ANALYTICS_COLLECTION_ENABLED" />
-            <meta-data android:name="google_analytics_automatic_screen_reporting_enabled" android:value="$AUTOMATIC_SCREEN_REPORTING_ENABLED" />
-            <meta-data android:name="google_analytics_default_allow_analytics_storage" android:value="$GOOGLE_ANALYTICS_DEFAULT_ALLOW_ANALYTICS_STORAGE" />
-            <meta-data android:name="google_analytics_default_allow_ad_storage" android:value="$GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_STORAGE" />
-            <meta-data android:name="google_analytics_default_allow_ad_user_data" android:value="$GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_USER_DATA" />
-            <meta-data android:name="google_analytics_default_allow_ad_personalization_signals" android:value="$GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_PERSONALIZATION_SIGNALS" />
+            <meta-data android:name="firebase_analytics_collection_enabled"
+                android:value="$ANALYTICS_COLLECTION_ENABLED" />
+            <meta-data android:name="google_analytics_automatic_screen_reporting_enabled"
+                android:value="$AUTOMATIC_SCREEN_REPORTING_ENABLED" />
+            <meta-data android:name="google_analytics_default_allow_analytics_storage"
+                android:value="$GOOGLE_ANALYTICS_DEFAULT_ALLOW_ANALYTICS_STORAGE" />
+            <meta-data android:name="google_analytics_default_allow_ad_storage"
+                android:value="$GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_STORAGE" />
+            <meta-data android:name="google_analytics_default_allow_ad_user_data"
+                android:value="$GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_USER_DATA" />
+            <meta-data android:name="google_analytics_default_allow_ad_personalization_signals"
+                android:value="$GOOGLE_ANALYTICS_DEFAULT_ALLOW_AD_PERSONALIZATION_SIGNALS" />
         </config-file>
 
         <dependency id="cordova-support-android-plugin" version="~2.0.4" />
